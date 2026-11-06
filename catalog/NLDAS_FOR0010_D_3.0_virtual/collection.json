@@ -1,0 +1,124 @@
+{
+  "type": "Collection",
+  "id": "NLDAS_FOR0010_D_3.0_virtual",
+  "stac_version": "1.1.0",
+  "description": "VEDA-built Icechunk store over GES DISC NLDAS_FOR0010_D_3.0 (beta) daily forcing, 8399 days x 6500 x 11700. Store and chunks are both readable anonymously.\n\nStatus (probed 2026-11-06): Early development; store dated 2026-03-02.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    },
+    {
+      "rel": "about",
+      "href": "https://github.com/virtual-zarr/nldas-icechunk",
+      "type": "text/html",
+      "title": "virtual-zarr/nldas-icechunk"
+    },
+    {
+      "rel": "about",
+      "href": "https://nasa-impact.github.io/dse-virtual-zarr-workshop/examples/03_STAC_Collection_for_Virtual_Icechunk_Store.html",
+      "type": "text/html",
+      "title": "Workshop STAC example"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/virtual-assets/v1.0.0/schema.json"
+  ],
+  "storage:schemes": {
+    "aws-s3-nasa-waterinsight": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "nasa-waterinsight",
+      "region": "us-west-2",
+      "anonymous": true
+    }
+  },
+  "title": "NLDAS-3 daily forcing (beta) virtual Icechunk store",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          null,
+          null
+        ]
+      ]
+    }
+  },
+  "license": "other",
+  "keywords": [
+    "virtual-zarr",
+    "icechunk",
+    "nldas",
+    "forcing"
+  ],
+  "providers": [
+    {
+      "name": "NASA GES DISC",
+      "roles": [
+        "producer",
+        "host"
+      ],
+      "url": "https://disc.gsfc.nasa.gov/"
+    },
+    {
+      "name": "NASA VEDA",
+      "roles": [
+        "processor",
+        "host"
+      ],
+      "url": "https://www.earthdata.nasa.gov/esds/veda"
+    }
+  ],
+  "assets": {
+    "source-data": {
+      "href": "s3://nasa-waterinsight/NLDAS3/forcing/daily/",
+      "type": "application/x-netcdf",
+      "title": "NLDAS-3 daily forcing NetCDF files",
+      "storage:refs": [
+        "aws-s3-nasa-waterinsight"
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "icechunk": {
+      "href": "s3://nasa-waterinsight/virtual-zarr-store/NLDAS-3-icechunk/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "NLDAS-3 daily forcing virtual Icechunk store (Icechunk v1 layout)",
+      "storage:refs": [
+        "aws-s3-nasa-waterinsight"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/NLDAS_FOR0010_D_3.0_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual",
+        "latest-version"
+      ]
+    }
+  }
+}

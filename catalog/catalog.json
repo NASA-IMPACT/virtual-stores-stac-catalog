@@ -1,0 +1,189 @@
+{
+  "type": "Catalog",
+  "id": "nasa-earthdata-virtual-stores",
+  "stac_version": "1.1.0",
+  "description": "Persisted virtual Zarr stores (Icechunk and Kerchunk) of NASA Earth science data, probed 2026-11-06. Each collection carries its stores as collection-level assets, with storage, authentication and virtual-asset metadata describing where the manifest and the chunk bytes live and how to read them.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "./catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    },
+    {
+      "rel": "child",
+      "href": "./RASI_virtual/collection.json",
+      "type": "application/json",
+      "title": "RASI (Regional Hydroclimate Projections) virtual Icechunk stores"
+    },
+    {
+      "rel": "child",
+      "href": "./NLDAS_FOR0010_D_3.0_virtual/collection.json",
+      "type": "application/json",
+      "title": "NLDAS-3 daily forcing (beta) virtual Icechunk store"
+    },
+    {
+      "rel": "child",
+      "href": "./GEOS-CF_v2_virtual/collection.json",
+      "type": "application/json",
+      "title": "GEOS-CF v2 air-quality subset virtual Icechunk stores"
+    },
+    {
+      "rel": "child",
+      "href": "./TEMPO_NO2_L3_V04_virtual/collection.json",
+      "type": "application/json",
+      "title": "TEMPO L3 V04 NO2 virtual Icechunk stores"
+    },
+    {
+      "rel": "child",
+      "href": "./TEMPO_HCHO_L3_V04_virtual/collection.json",
+      "type": "application/json",
+      "title": "TEMPO L3 V04 HCHO virtual Icechunk stores"
+    },
+    {
+      "rel": "child",
+      "href": "./PREFIRE_SAT2_3-SFC-SORTED-ALLSKY_R01_virtual/collection.json",
+      "type": "application/json",
+      "title": "PREFIRE SAT2 L3 surface emissivity (monthly) Kerchunk reference"
+    },
+    {
+      "rel": "child",
+      "href": "./CCMP_WINDS_10M6HR_L4_V3.1_virtual/collection.json",
+      "type": "application/json",
+      "title": "CCMP_WINDS_10M6HR_L4_V3.1 virtual dataset"
+    },
+    {
+      "rel": "child",
+      "href": "./ECCO_L4_TEMP_SALINITY_05DEG_DAILY_V4R4_virtual/collection.json",
+      "type": "application/json",
+      "title": "ECCO_L4_TEMP_SALINITY_05DEG_DAILY_V4R4 virtual dataset"
+    },
+    {
+      "rel": "child",
+      "href": "./ECCO_L4_OCEAN_VEL_05DEG_DAILY_V4R4_virtual/collection.json",
+      "type": "application/json",
+      "title": "ECCO_L4_OCEAN_VEL_05DEG_DAILY_V4R4 virtual dataset"
+    },
+    {
+      "rel": "child",
+      "href": "./ECCO_L4_OBP_05DEG_DAILY_V4R4B_virtual/collection.json",
+      "type": "application/json",
+      "title": "ECCO_L4_OBP_05DEG_DAILY_V4R4B virtual dataset"
+    },
+    {
+      "rel": "child",
+      "href": "./ECCO_L4_SSH_05DEG_DAILY_V4R4B_virtual/collection.json",
+      "type": "application/json",
+      "title": "ECCO_L4_SSH_05DEG_DAILY_V4R4B virtual dataset"
+    },
+    {
+      "rel": "child",
+      "href": "./MUR25-JPL-L4-GLOB-v04.2_virtual/collection.json",
+      "type": "application/json",
+      "title": "MUR25-JPL-L4-GLOB-v04.2 virtual dataset"
+    },
+    {
+      "rel": "child",
+      "href": "./OSTIA-UKMO-L4-GLOB-REP-v2.0_virtual/collection.json",
+      "type": "application/json",
+      "title": "OSTIA-UKMO-L4-GLOB-REP-v2.0 virtual dataset"
+    },
+    {
+      "rel": "child",
+      "href": "./NEUROST_SSH-SST_L4_V2024.0_virtual/collection.json",
+      "type": "application/json",
+      "title": "NEUROST_SSH-SST_L4_V2024.0 virtual dataset"
+    },
+    {
+      "rel": "child",
+      "href": "./SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6_virtual/collection.json",
+      "type": "application/json",
+      "title": "SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6 virtual dataset"
+    },
+    {
+      "rel": "child",
+      "href": "./TELLUS_GRAC-GRFO_MASCON_CRI_GRID_RL06.3_V4_virtual/collection.json",
+      "type": "application/json",
+      "title": "TELLUS_GRAC-GRFO_MASCON_CRI_GRID_RL06.3_V4 virtual dataset"
+    },
+    {
+      "rel": "child",
+      "href": "./SCATSAT1_ESDR_L2_WIND_STRESS_V1.1_virtual/collection.json",
+      "type": "application/json",
+      "title": "SCATSAT1_ESDR_L2_WIND_STRESS_V1.1 virtual dataset"
+    },
+    {
+      "rel": "child",
+      "href": "./SWOT_L2_LR_SSH_Basic_D_virtual/collection.json",
+      "type": "application/json",
+      "title": "SWOT_L2_LR_SSH_Basic_D virtual dataset"
+    },
+    {
+      "rel": "child",
+      "href": "./SASSIE_ECCO_L4_DAILY_V1R1_virtual/collection.json",
+      "type": "application/json",
+      "title": "SASSIE ECCO L4 V1R1 daily virtual Icechunk store"
+    },
+    {
+      "rel": "child",
+      "href": "./SASSIE_ECCO_L4_SNAPSHOT_V1R1_virtual/collection.json",
+      "type": "application/json",
+      "title": "SASSIE ECCO L4 V1R1 snapshot virtual Icechunk store"
+    },
+    {
+      "rel": "child",
+      "href": "./MUR-JPL-L4-GLOB-v4.1_virtual/collection.json",
+      "type": "application/json",
+      "title": "MUR SST L4 v4.1 virtual stores"
+    },
+    {
+      "rel": "child",
+      "href": "./OPERA_L3_DISP-S1_V1_virtual/collection.json",
+      "type": "application/json",
+      "title": "OPERA L3 DISP-S1 V1 virtual Zarr references"
+    },
+    {
+      "rel": "child",
+      "href": "./GPM_3IMERGHH_07_virtual/collection.json",
+      "type": "application/json",
+      "title": "GPM IMERG half-hourly V07 virtual Icechunk store"
+    },
+    {
+      "rel": "child",
+      "href": "./NEX-GDDP-CMIP6_v2.0_virtual/collection.json",
+      "type": "application/json",
+      "title": "NEX-GDDP-CMIP6 v2.0 virtual DataTree (Icechunk)"
+    },
+    {
+      "rel": "child",
+      "href": "./CMIP6_daily_GISS-E2-1-G_tas_kerchunk_virtual/collection.json",
+      "type": "application/json",
+      "title": "NEX-GDDP-CMIP6 GISS-E2-1-G tas Kerchunk demo"
+    },
+    {
+      "rel": "child",
+      "href": "./PACE_OCI_L3M_CHL_virtual/collection.json",
+      "type": "application/json",
+      "title": "PACE OCI L3M CHL virtual Icechunk stores"
+    },
+    {
+      "rel": "child",
+      "href": "./PACE_OCI_L3M_RRS_virtual/collection.json",
+      "type": "application/json",
+      "title": "PACE OCI L3M RRS virtual Icechunk stores"
+    },
+    {
+      "rel": "child",
+      "href": "./PACE_OCI_L3M_KD_virtual/collection.json",
+      "type": "application/json",
+      "title": "PACE OCI L3M KD virtual Icechunk stores"
+    },
+    {
+      "rel": "child",
+      "href": "./SPL4SMGP_virtual/collection.json",
+      "type": "application/json",
+      "title": "SMAP L4 soil moisture (SPL4SMGP), 10 years, Kerchunk references"
+    }
+  ],
+  "title": "NASA Earthdata Virtual Stores"
+}

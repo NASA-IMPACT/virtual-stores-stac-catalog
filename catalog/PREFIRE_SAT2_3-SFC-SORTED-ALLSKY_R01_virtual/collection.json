@@ -1,0 +1,162 @@
+{
+  "type": "Collection",
+  "id": "PREFIRE_SAT2_3-SFC-SORTED-ALLSKY_R01_virtual",
+  "stac_version": "1.1.0",
+  "description": "ASDC Kerchunk JSON reference for PREFIRE_SAT2_3-SFC-SORTED-ALLSKY R01, created 2025-08-19. Reference file is anonymous over TEA HTTPS (direct S3 returns 403); chunks need Earthdata Login.\n\nStatus (probed 2026-11-06): Proof of concept.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    },
+    {
+      "rel": "about",
+      "href": "https://nasa.github.io/ASDC_Data_and_User_Services/PREFIRE/how_to_generate_and_read_virtual_datacube-for-PREFIRE.html",
+      "type": "text/html",
+      "title": "How-to page"
+    },
+    {
+      "rel": "about",
+      "href": "https://github.com/nasa/ASDC_Data_and_User_Services/blob/main/PREFIRE/additional_drafts/read-references-for-PREFIRE-from-s3.ipynb",
+      "type": "text/html",
+      "title": "Demo notebook"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/alternate-assets/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/authentication/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/virtual-assets/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/xarray-assets/v1.0.0/schema.json"
+  ],
+  "storage:schemes": {
+    "aws-s3-asdc-prod-public": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "asdc-prod-public",
+      "region": "us-west-2",
+      "anonymous": false
+    },
+    "https-data.asdc.earthdata.nasa.gov-asdc-prod-public": {
+      "type": "https",
+      "platform": "https://data.asdc.earthdata.nasa.gov/{bucket}",
+      "anonymous": true,
+      "bucket": "asdc-prod-public"
+    },
+    "aws-s3-asdc-prod-protected": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "asdc-prod-protected",
+      "region": "us-west-2",
+      "anonymous": false
+    }
+  },
+  "auth:schemes": {
+    "edl-s3-asdc": {
+      "type": "s3",
+      "description": "Earthdata Login: temporary S3 credentials from https://data.asdc.earthdata.nasa.gov/s3credentials. Valid only for in-region (us-west-2) access."
+    }
+  },
+  "title": "PREFIRE SAT2 L3 surface emissivity (monthly) Kerchunk reference",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          null,
+          null
+        ]
+      ]
+    }
+  },
+  "license": "other",
+  "keywords": [
+    "virtual-zarr",
+    "kerchunk",
+    "prefire",
+    "emissivity"
+  ],
+  "providers": [
+    {
+      "name": "NASA ASDC",
+      "roles": [
+        "producer",
+        "processor",
+        "host"
+      ],
+      "url": "https://asdc.larc.nasa.gov/"
+    }
+  ],
+  "assets": {
+    "source-data": {
+      "href": "s3://asdc-prod-protected/PREFIRE/",
+      "type": "application/x-netcdf",
+      "title": "PREFIRE granules (ASDC protected bucket)",
+      "storage:refs": [
+        "aws-s3-asdc-prod-protected"
+      ],
+      "auth:refs": [
+        "edl-s3-asdc"
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "kerchunk": {
+      "href": "https://data.asdc.earthdata.nasa.gov/asdc-prod-public/virtual-reference-docs/PREFIRE_SAT2_3-SFC-SORTED-ALLSKY_R01/prefire-monthly-kerchunk_created20250819.json",
+      "type": "application/json",
+      "title": "PREFIRE monthly Kerchunk JSON",
+      "storage:refs": [
+        "https-data.asdc.earthdata.nasa.gov-asdc-prod-public"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/PREFIRE_SAT2_3-SFC-SORTED-ALLSKY_R01_virtual#/assets/source-data"
+        }
+      ],
+      "xarray:open_kwargs": {
+        "engine": "kerchunk",
+        "storage_options": {
+          "remote_protocol": "s3",
+          "remote_options": {
+            "anon": false
+          }
+        }
+      },
+      "alternate": {
+        "s3": {
+          "href": "s3://asdc-prod-public/virtual-reference-docs/PREFIRE_SAT2_3-SFC-SORTED-ALLSKY_R01/prefire-monthly-kerchunk_created20250819.json",
+          "storage:refs": [
+            "aws-s3-asdc-prod-public"
+          ],
+          "auth:refs": [
+            "edl-s3-asdc"
+          ]
+        }
+      },
+      "roles": [
+        "data",
+        "references",
+        "virtual",
+        "latest-version"
+      ]
+    }
+  }
+}

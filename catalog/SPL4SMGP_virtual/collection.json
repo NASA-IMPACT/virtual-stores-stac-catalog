@@ -1,0 +1,180 @@
+{
+  "type": "Collection",
+  "id": "SPL4SMGP_virtual",
+  "stac_version": "1.1.0",
+  "description": "NSIDC Kerchunk references for 10 years of SPL4SMGP (3-hourly, 9 km): a Parquet directory (53 objects; open it with a trailing slash) and a 316 MB JSON twin, both dated 2025-10-10 and readable anonymously. Chunks are in the NSIDC Cumulus protected bucket and need Earthdata Login (bucket name nsidc-cumulus-prod-protected is inferred; the inventory records only 'NSIDC Cumulus protected').\n\nStatus (probed 2026-11-06): Proof of concept.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    },
+    {
+      "rel": "about",
+      "href": "https://github.com/nsidc/NSIDC-Data-Tutorials/blob/main/notebooks/SMAP/smap_virtual.ipynb",
+      "type": "text/html",
+      "title": "SPL4SMGP notebook"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/alternate-assets/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/authentication/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/virtual-assets/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/xarray-assets/v1.0.0/schema.json"
+  ],
+  "storage:schemes": {
+    "aws-s3-its-live-data": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "its-live-data",
+      "region": "us-west-2",
+      "anonymous": true
+    },
+    "https-its-live-data.s3.us-west-2.amazonaws.com": {
+      "type": "https",
+      "platform": "https://its-live-data.s3.us-west-2.amazonaws.com",
+      "anonymous": true
+    },
+    "aws-s3-nsidc-cumulus-prod-protected": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "nsidc-cumulus-prod-protected",
+      "region": "us-west-2",
+      "anonymous": false
+    }
+  },
+  "auth:schemes": {
+    "edl-s3-nsidc": {
+      "type": "s3",
+      "description": "Earthdata Login: temporary S3 credentials from https://data.nsidc.earthdatacloud.nasa.gov/s3credentials. Valid only for in-region (us-west-2) access."
+    }
+  },
+  "title": "SMAP L4 soil moisture (SPL4SMGP), 10 years, Kerchunk references",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          null,
+          null
+        ]
+      ]
+    }
+  },
+  "license": "other",
+  "keywords": [
+    "virtual-zarr",
+    "kerchunk",
+    "smap",
+    "soil-moisture"
+  ],
+  "providers": [
+    {
+      "name": "NASA NSIDC DAAC",
+      "roles": [
+        "producer",
+        "processor",
+        "host"
+      ],
+      "url": "https://nsidc.org/data"
+    }
+  ],
+  "assets": {
+    "source-data": {
+      "href": "s3://nsidc-cumulus-prod-protected/",
+      "type": "application/x-hdf5",
+      "title": "SPL4SMGP HDF5 granules (NSIDC protected bucket)",
+      "storage:refs": [
+        "aws-s3-nsidc-cumulus-prod-protected"
+      ],
+      "auth:refs": [
+        "edl-s3-nsidc"
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "kerchunk-parquet": {
+      "href": "s3://its-live-data/test-space/vds/SPL4SMGP.parquet/",
+      "type": "application/vnd.apache.parquet",
+      "title": "Kerchunk Parquet directory",
+      "storage:refs": [
+        "aws-s3-its-live-data"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/SPL4SMGP_virtual#/assets/source-data"
+        }
+      ],
+      "xarray:open_kwargs": {
+        "engine": "kerchunk",
+        "storage_options": {
+          "remote_protocol": "s3",
+          "remote_options": {
+            "anon": false
+          }
+        }
+      },
+      "roles": [
+        "data",
+        "references",
+        "virtual",
+        "latest-version"
+      ]
+    },
+    "kerchunk-json": {
+      "href": "https://its-live-data.s3.us-west-2.amazonaws.com/test-space/vds/SPL4SMGP.json",
+      "type": "application/json",
+      "title": "Kerchunk JSON (316 MB)",
+      "storage:refs": [
+        "https-its-live-data.s3.us-west-2.amazonaws.com"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/SPL4SMGP_virtual#/assets/source-data"
+        }
+      ],
+      "xarray:open_kwargs": {
+        "engine": "kerchunk",
+        "storage_options": {
+          "remote_protocol": "s3",
+          "remote_options": {
+            "anon": false
+          }
+        }
+      },
+      "alternate": {
+        "s3": {
+          "href": "s3://its-live-data/test-space/vds/SPL4SMGP.json",
+          "storage:refs": [
+            "aws-s3-its-live-data"
+          ]
+        }
+      },
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    }
+  }
+}

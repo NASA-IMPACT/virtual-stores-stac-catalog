@@ -1,0 +1,318 @@
+{
+  "type": "Collection",
+  "id": "MUR-JPL-L4-GLOB-v4.1_virtual",
+  "stac_version": "1.1.0",
+  "description": "Virtual stores over PO.DAAC MUR-JPL-L4-GLOB-v4.1 from two producers. VEDA: Icechunk experiments with daily append branches named add_time_<timestamp> (three generations, 2025-04-26 to 2025-10-19; v2-p2 is the newest and is the default here) and a 2024-03-19 Kerchunk set (1.16 GB JSON and a Parquet directory) whose provenance is undocumented. PO.DAAC: the legacy first-decade Kerchunk reference set advertised in CMR. All manifests are anonymous; chunks need Earthdata Login.\n\nStatus (probed 2026-11-06): Experimental (VEDA Icechunk); Legacy (Kerchunk sets).",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    },
+    {
+      "rel": "via",
+      "href": "https://cmr.earthdata.nasa.gov/search/concepts/C1996881146-POCLOUD.umm_json",
+      "type": "application/vnd.nasa.cmr.umm+json",
+      "title": "CMR collection C1996881146-POCLOUD"
+    },
+    {
+      "rel": "about",
+      "href": "https://github.com/developmentseed/mursst-icechunk-updater",
+      "type": "text/html",
+      "title": "developmentseed/mursst-icechunk-updater"
+    },
+    {
+      "rel": "about",
+      "href": "https://podaac.github.io/tutorials/notebooks/Advanced_cloud/kerchunk_recipes.html",
+      "type": "text/html",
+      "title": "PO.DAAC Kerchunk recipes"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/alternate-assets/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/authentication/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/virtual-assets/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/xarray-assets/v1.0.0/schema.json"
+  ],
+  "storage:schemes": {
+    "aws-s3-nasa-eodc-public": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "nasa-eodc-public",
+      "region": "us-west-2",
+      "anonymous": true
+    },
+    "https-nasa-eodc-public.s3.us-west-2.amazonaws.com": {
+      "type": "https",
+      "platform": "https://nasa-eodc-public.s3.us-west-2.amazonaws.com",
+      "anonymous": true
+    },
+    "https-archive.podaac.earthdata.nasa.gov-podaac-ops-cumulus-docs": {
+      "type": "https",
+      "platform": "https://archive.podaac.earthdata.nasa.gov/{bucket}",
+      "anonymous": true,
+      "bucket": "podaac-ops-cumulus-docs"
+    },
+    "aws-s3-podaac-ops-cumulus-protected": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "podaac-ops-cumulus-protected",
+      "region": "us-west-2",
+      "anonymous": false
+    }
+  },
+  "auth:schemes": {
+    "edl-s3-podaac": {
+      "type": "s3",
+      "description": "Earthdata Login: temporary S3 credentials from https://archive.podaac.earthdata.nasa.gov/s3credentials. Valid only for in-region (us-west-2) access."
+    }
+  },
+  "title": "MUR SST L4 v4.1 virtual stores",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          null,
+          null
+        ]
+      ]
+    }
+  },
+  "license": "other",
+  "keywords": [
+    "virtual-zarr",
+    "icechunk",
+    "kerchunk",
+    "sst",
+    "mur"
+  ],
+  "providers": [
+    {
+      "name": "NASA PO.DAAC",
+      "roles": [
+        "producer",
+        "processor",
+        "host"
+      ],
+      "url": "https://podaac.jpl.nasa.gov/"
+    },
+    {
+      "name": "NASA VEDA",
+      "roles": [
+        "processor",
+        "host"
+      ],
+      "url": "https://www.earthdata.nasa.gov/esds/veda"
+    },
+    {
+      "name": "Development Seed",
+      "roles": [
+        "processor"
+      ],
+      "url": "https://developmentseed.org/"
+    }
+  ],
+  "assets": {
+    "source-data": {
+      "href": "s3://podaac-ops-cumulus-protected/MUR-JPL-L4-GLOB-v4.1/",
+      "type": "application/x-netcdf",
+      "title": "MUR v4.1 granules (PO.DAAC protected bucket)",
+      "storage:refs": [
+        "aws-s3-podaac-ops-cumulus-protected"
+      ],
+      "auth:refs": [
+        "edl-s3-podaac"
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "veda-icechunk-v2-p2": {
+      "href": "s3://nasa-eodc-public/icechunk/MUR-JPL-L4-GLOB-v4.1-virtual-v2-p2/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "VEDA MUR v4.1 Icechunk store, generation v2-p2 (Icechunk v1 layout)",
+      "storage:refs": [
+        "aws-s3-nasa-eodc-public"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/MUR-JPL-L4-GLOB-v4.1_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual",
+        "latest-version"
+      ]
+    },
+    "veda-icechunk-v1": {
+      "href": "s3://nasa-eodc-public/icechunk/MUR-JPL-L4-GLOB-v4.1-virtual-v1/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "VEDA MUR v4.1 Icechunk store, generation v1",
+      "storage:refs": [
+        "aws-s3-nasa-eodc-public"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/MUR-JPL-L4-GLOB-v4.1_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "veda-icechunk-v1-p2": {
+      "href": "s3://nasa-eodc-public/icechunk/MUR-JPL-L4-GLOB-v4.1-virtual-v1-p2/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "VEDA MUR v4.1 Icechunk store, generation v1-p2",
+      "storage:refs": [
+        "aws-s3-nasa-eodc-public"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/MUR-JPL-L4-GLOB-v4.1_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "veda-kerchunk-2024": {
+      "href": "https://nasa-eodc-public.s3.us-west-2.amazonaws.com/MUR-JPL-L4-GLOB-v4.1/reference.json",
+      "type": "application/json",
+      "title": "VEDA 2024 Kerchunk JSON (1.16 GB)",
+      "storage:refs": [
+        "https-nasa-eodc-public.s3.us-west-2.amazonaws.com"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/MUR-JPL-L4-GLOB-v4.1_virtual#/assets/source-data"
+        }
+      ],
+      "xarray:open_kwargs": {
+        "engine": "kerchunk",
+        "storage_options": {
+          "remote_protocol": "s3",
+          "remote_options": {
+            "anon": false
+          }
+        }
+      },
+      "alternate": {
+        "s3": {
+          "href": "s3://nasa-eodc-public/MUR-JPL-L4-GLOB-v4.1/reference.json",
+          "storage:refs": [
+            "aws-s3-nasa-eodc-public"
+          ]
+        }
+      },
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "veda-kerchunk-2024-parquet": {
+      "href": "s3://nasa-eodc-public/MUR-JPL-L4-GLOB-v4.1/mursst-combined.parq/",
+      "type": "application/vnd.apache.parquet",
+      "title": "VEDA 2024 Kerchunk Parquet directory",
+      "storage:refs": [
+        "aws-s3-nasa-eodc-public"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/MUR-JPL-L4-GLOB-v4.1_virtual#/assets/source-data"
+        }
+      ],
+      "xarray:open_kwargs": {
+        "engine": "kerchunk",
+        "storage_options": {
+          "remote_protocol": "s3",
+          "remote_options": {
+            "anon": false
+          }
+        }
+      },
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "podaac-kerchunk-first-decade": {
+      "href": "https://archive.podaac.earthdata.nasa.gov/podaac-ops-cumulus-docs/ghrsst/open/docs/MUR-JPL-L4-GLOB-v4.1_combined-ref.json",
+      "type": "application/json",
+      "title": "PO.DAAC Kerchunk JSON for the first decade of the MUR record (in CMR)",
+      "storage:refs": [
+        "https-archive.podaac.earthdata.nasa.gov-podaac-ops-cumulus-docs"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/MUR-JPL-L4-GLOB-v4.1_virtual#/assets/source-data"
+        }
+      ],
+      "xarray:open_kwargs": {
+        "engine": "kerchunk",
+        "storage_options": {
+          "remote_protocol": "s3",
+          "remote_options": {
+            "anon": false
+          }
+        }
+      },
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "podaac-kerchunk-first-decade-parquet": {
+      "href": "https://archive.podaac.earthdata.nasa.gov/podaac-ops-cumulus-docs/ghrsst/open/docs/MUR-JPL-L4-GLOB-v4.1_combined-ref.parq.zip",
+      "type": "application/zip",
+      "title": "PO.DAAC Kerchunk Parquet (zipped) for the first decade of the MUR record",
+      "storage:refs": [
+        "https-archive.podaac.earthdata.nasa.gov-podaac-ops-cumulus-docs"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/MUR-JPL-L4-GLOB-v4.1_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    }
+  }
+}

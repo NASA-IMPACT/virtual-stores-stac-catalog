@@ -1,0 +1,134 @@
+{
+  "type": "Collection",
+  "id": "CMIP6_daily_GISS-E2-1-G_tas_kerchunk_virtual",
+  "stac_version": "1.1.0",
+  "description": "Kerchunk JSON demo already published in the production VEDA STAC as combined_CMIP6_daily_GISS-E2-1-G_tas_kerchunk_DEMO, the only virtual collection there. The reference file is in a protected bucket. The companion Icechunk collection from the publish-cmip6-virtual-zarr-stac notebook (CMIP6_daily_GISS-E2-1-G_tas) was never ingested.\n\nStatus (probed 2026-11-06): Demo.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    },
+    {
+      "rel": "about",
+      "href": "https://github.com/NASA-IMPACT/veda-data",
+      "type": "text/html",
+      "title": "veda-data"
+    },
+    {
+      "rel": "about",
+      "href": "https://openveda.cloud/api/stac/collections/combined_CMIP6_daily_GISS-E2-1-G_tas_kerchunk_DEMO",
+      "type": "text/html",
+      "title": "Existing VEDA STAC collection"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/virtual-assets/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/xarray-assets/v1.0.0/schema.json"
+  ],
+  "storage:schemes": {
+    "aws-s3-veda-data-store-staging": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "veda-data-store-staging",
+      "region": "us-west-2",
+      "anonymous": false
+    }
+  },
+  "title": "NEX-GDDP-CMIP6 GISS-E2-1-G tas Kerchunk demo",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          null,
+          null
+        ]
+      ]
+    }
+  },
+  "license": "CC0-1.0",
+  "keywords": [
+    "virtual-zarr",
+    "kerchunk",
+    "cmip6",
+    "nex-gddp",
+    "demo"
+  ],
+  "providers": [
+    {
+      "name": "NASA Earth Exchange (NEX)",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://www.nasa.gov/nex"
+    },
+    {
+      "name": "NASA VEDA",
+      "roles": [
+        "processor",
+        "host"
+      ],
+      "url": "https://www.earthdata.nasa.gov/esds/veda"
+    }
+  ],
+  "assets": {
+    "source-data": {
+      "href": "s3://veda-data-store-staging/",
+      "type": "application/x-netcdf",
+      "title": "Referenced data (veda-data-store-staging, as recorded in the inventory)",
+      "storage:refs": [
+        "aws-s3-veda-data-store-staging"
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "kerchunk": {
+      "href": "s3://veda-data-store-staging/cmip6-GISS-E2-1-G-tas-kerchunk/combined_CMIP6_daily_GISS-E2-1-G_tas_kerchunk.json",
+      "type": "application/json",
+      "title": "Kerchunk JSON (protected bucket; needs VEDA credentials)",
+      "storage:refs": [
+        "aws-s3-veda-data-store-staging"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/CMIP6_daily_GISS-E2-1-G_tas_kerchunk_virtual#/assets/source-data"
+        }
+      ],
+      "xarray:open_kwargs": {
+        "engine": "kerchunk",
+        "storage_options": {
+          "remote_protocol": "s3",
+          "remote_options": {
+            "anon": true
+          }
+        }
+      },
+      "roles": [
+        "data",
+        "references",
+        "virtual",
+        "latest-version"
+      ]
+    }
+  }
+}

@@ -1,0 +1,274 @@
+{
+  "type": "Collection",
+  "id": "TEMPO_NO2_L3_V04_virtual",
+  "stac_version": "1.1.0",
+  "description": "Virtual Icechunk stores over ASDC TEMPO_NO2_L3 V04. The ASDC full-record snapshot (Icechunk v2, written with icechunk 2.2.2; open with icechunk >= 2.2.2) is the default. Its virtual chunk container is named 'asdc' and points at s3://asdc-prod-protected/. The ASDC manifest bucket refuses anonymous direct S3 but serves the same objects anonymously over TEA HTTPS; chunks always need Earthdata Login. To open from outside us-west-2, re-point the 'asdc' container at the TEA HTTPS alternate with a bearer token. A Source Cooperative mirror (refreshed by hand, maintained by Development Seed) allows anonymous S3 listing of the manifest. Not advertised in CMR (CMR still points at the January 2026 proof of concept, also included here).\n\nStatus (probed 2026-11-06): Experimental snapshot; pipeline pushed 2026-11-05; Source Coop mirror 2026-10-15.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    },
+    {
+      "rel": "via",
+      "href": "https://cmr.earthdata.nasa.gov/search/concepts/C3685896708-LARC_CLOUD.umm_json",
+      "type": "application/vnd.nasa.cmr.umm+json",
+      "title": "CMR collection C3685896708-LARC_CLOUD"
+    },
+    {
+      "rel": "about",
+      "href": "https://github.com/virtual-zarr/tempo-virtual-zarr-pipeline",
+      "type": "text/html",
+      "title": "virtual-zarr/tempo-virtual-zarr-pipeline"
+    },
+    {
+      "rel": "about",
+      "href": "https://tempo.virtualzarr.cloud/reference/stores/",
+      "type": "text/html",
+      "title": "tempo.virtualzarr.cloud stores"
+    },
+    {
+      "rel": "about",
+      "href": "https://source.coop/pangeo/tempo-virtual-icechunk",
+      "type": "text/html",
+      "title": "Source Coop mirror"
+    },
+    {
+      "rel": "about",
+      "href": "https://tempo.virtualzarr.cloud/reference/runbook-mirror-to-source-coop/",
+      "type": "text/html",
+      "title": "Mirror runbook"
+    },
+    {
+      "rel": "about",
+      "href": "https://github.com/nasa/ASDC_Data_and_User_Services/blob/main/TEMPO/additional_drafts/read-references-for-TEMPO-from-s3-icechunk.ipynb",
+      "type": "text/html",
+      "title": "POC demo notebook"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/alternate-assets/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/authentication/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/virtual-assets/v1.0.0/schema.json"
+  ],
+  "storage:schemes": {
+    "aws-s3-asdc-prod-public": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "asdc-prod-public",
+      "region": "us-west-2",
+      "anonymous": false
+    },
+    "https-data.asdc.earthdata.nasa.gov-asdc-prod-public": {
+      "type": "https",
+      "platform": "https://data.asdc.earthdata.nasa.gov/{bucket}",
+      "anonymous": true,
+      "bucket": "asdc-prod-public"
+    },
+    "aws-s3-asdc-prod-protected": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "asdc-prod-protected",
+      "region": "us-west-2",
+      "anonymous": false
+    },
+    "https-data.asdc.earthdata.nasa.gov-asdc-prod-protected": {
+      "type": "https",
+      "platform": "https://data.asdc.earthdata.nasa.gov/{bucket}",
+      "anonymous": false,
+      "bucket": "asdc-prod-protected"
+    },
+    "aws-s3-us-west-2.opendata.source.coop": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "us-west-2.opendata.source.coop",
+      "region": "us-west-2",
+      "anonymous": true
+    },
+    "https-data.source.coop": {
+      "type": "https",
+      "platform": "https://data.source.coop",
+      "anonymous": true
+    }
+  },
+  "auth:schemes": {
+    "edl-s3-asdc": {
+      "type": "s3",
+      "description": "Earthdata Login: temporary S3 credentials from https://data.asdc.earthdata.nasa.gov/s3credentials. Valid only for in-region (us-west-2) access."
+    },
+    "edl-bearer": {
+      "type": "http",
+      "scheme": "bearer",
+      "description": "Earthdata Login user token from https://urs.earthdata.nasa.gov, sent as 'Authorization: Bearer <token>' to the DAAC TEA HTTPS endpoint. Works from any region."
+    }
+  },
+  "title": "TEMPO L3 V04 NO2 virtual Icechunk stores",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          null,
+          null
+        ]
+      ]
+    }
+  },
+  "license": "other",
+  "keywords": [
+    "virtual-zarr",
+    "icechunk",
+    "tempo",
+    "no2",
+    "air-quality"
+  ],
+  "providers": [
+    {
+      "name": "NASA ASDC",
+      "roles": [
+        "producer",
+        "processor",
+        "host"
+      ],
+      "url": "https://asdc.larc.nasa.gov/"
+    },
+    {
+      "name": "Development Seed",
+      "roles": [
+        "processor"
+      ],
+      "url": "https://developmentseed.org/"
+    },
+    {
+      "name": "Source Cooperative",
+      "roles": [
+        "host"
+      ],
+      "url": "https://source.coop/"
+    }
+  ],
+  "assets": {
+    "source-data": {
+      "href": "s3://asdc-prod-protected/",
+      "type": "application/x-netcdf",
+      "title": "TEMPO L3 granules (ASDC protected bucket)",
+      "storage:refs": [
+        "aws-s3-asdc-prod-protected"
+      ],
+      "auth:refs": [
+        "edl-s3-asdc"
+      ],
+      "alternate": {
+        "https": {
+          "href": "https://data.asdc.earthdata.nasa.gov/asdc-prod-protected/",
+          "storage:refs": [
+            "https-data.asdc.earthdata.nasa.gov-asdc-prod-protected"
+          ],
+          "auth:refs": [
+            "edl-bearer"
+          ]
+        }
+      },
+      "roles": [
+        "data"
+      ]
+    },
+    "asdc-icechunk": {
+      "href": "s3://asdc-prod-public/virtual-icechunk/TEMPO_NO2_L3_V04",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "TEMPO NO2 L3 V04 full-record snapshot (ASDC, Icechunk v2)",
+      "storage:refs": [
+        "aws-s3-asdc-prod-public"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/TEMPO_NO2_L3_V04_virtual#/assets/source-data"
+        }
+      ],
+      "auth:refs": [
+        "edl-s3-asdc"
+      ],
+      "alternate": {
+        "https": {
+          "href": "https://data.asdc.earthdata.nasa.gov/asdc-prod-public/virtual-icechunk/TEMPO_NO2_L3_V04",
+          "storage:refs": [
+            "https-data.asdc.earthdata.nasa.gov-asdc-prod-public"
+          ]
+        }
+      },
+      "roles": [
+        "data",
+        "references",
+        "virtual",
+        "latest-version"
+      ]
+    },
+    "sourcecoop-icechunk": {
+      "href": "s3://us-west-2.opendata.source.coop/pangeo/tempo-virtual-icechunk/tempo/no2/v04/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "TEMPO NO2 L3 V04 mirror on Source Cooperative (Icechunk v2)",
+      "storage:refs": [
+        "aws-s3-us-west-2.opendata.source.coop"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/TEMPO_NO2_L3_V04_virtual#/assets/source-data"
+        }
+      ],
+      "alternate": {
+        "https": {
+          "href": "https://data.source.coop/pangeo/tempo-virtual-icechunk/tempo/no2/v04/",
+          "storage:refs": [
+            "https-data.source.coop"
+          ]
+        }
+      },
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "poc-202601-icechunk": {
+      "href": "s3://asdc-prod-public/virtual-reference-docs/TEMPO_L3_V04_icechunk_for_202601/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "TEMPO NO2 L3 V04, January 2026 proof of concept (Icechunk v1 layout). Advertised in CMR as RelatedUrl GET DATA / VIRTUAL COLLECTION.",
+      "storage:refs": [
+        "aws-s3-asdc-prod-public"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/TEMPO_NO2_L3_V04_virtual#/assets/source-data"
+        }
+      ],
+      "auth:refs": [
+        "edl-s3-asdc"
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    }
+  }
+}

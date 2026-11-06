@@ -1,0 +1,134 @@
+{
+  "type": "Collection",
+  "id": "SASSIE_ECCO_L4_SNAPSHOT_V1R1_virtual",
+  "stac_version": "1.1.0",
+  "description": "PO.DAAC Icechunk store (Icechunk v1 layout; the tutorial pins icechunk 1.1.19) over SASSIE_ECCO_L4_SNAPSHOT_V1R1. Not found in CMR by short name. The tutorial runs in us-west-2 with PO.DAAC S3 credentials for both the store and the chunks.\n\nStatus (probed 2026-11-06): Production tutorial; dataset created 2026-03-21.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    },
+    {
+      "rel": "about",
+      "href": "https://podaac.github.io/tutorials/notebooks/Advanced_cloud/open_icechunk.html",
+      "type": "text/html",
+      "title": "Open Icechunk tutorial"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/authentication/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/virtual-assets/v1.0.0/schema.json"
+  ],
+  "storage:schemes": {
+    "aws-s3-podaac-ops-cumulus-public": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "podaac-ops-cumulus-public",
+      "region": "us-west-2",
+      "anonymous": false
+    },
+    "aws-s3-podaac-ops-cumulus-protected": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "podaac-ops-cumulus-protected",
+      "region": "us-west-2",
+      "anonymous": false
+    }
+  },
+  "sci:doi": "10.5067/SEL1D-DUG11",
+  "auth:schemes": {
+    "edl-s3-podaac": {
+      "type": "s3",
+      "description": "Earthdata Login: temporary S3 credentials from https://archive.podaac.earthdata.nasa.gov/s3credentials. Valid only for in-region (us-west-2) access."
+    }
+  },
+  "title": "SASSIE ECCO L4 V1R1 snapshot virtual Icechunk store",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          null,
+          null
+        ]
+      ]
+    }
+  },
+  "license": "other",
+  "keywords": [
+    "virtual-zarr",
+    "icechunk",
+    "sassie",
+    "ecco",
+    "podaac"
+  ],
+  "providers": [
+    {
+      "name": "NASA PO.DAAC",
+      "roles": [
+        "producer",
+        "processor",
+        "host"
+      ],
+      "url": "https://podaac.jpl.nasa.gov/"
+    }
+  ],
+  "assets": {
+    "source-data": {
+      "href": "s3://podaac-ops-cumulus-protected/",
+      "type": "application/x-netcdf",
+      "title": "SASSIE ECCO granules (PO.DAAC protected bucket)",
+      "storage:refs": [
+        "aws-s3-podaac-ops-cumulus-protected"
+      ],
+      "auth:refs": [
+        "edl-s3-podaac"
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "icechunk": {
+      "href": "s3://podaac-ops-cumulus-public/virtual_collections/SASSIE_ECCO_V1R1/SASSIE_ECCO_L4_SNAPSHOT_V1R1_virtual_s3.icechunk/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "SASSIE_ECCO_L4_SNAPSHOT_V1R1 virtual Icechunk store",
+      "storage:refs": [
+        "aws-s3-podaac-ops-cumulus-public"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/SASSIE_ECCO_L4_SNAPSHOT_V1R1_virtual#/assets/source-data"
+        }
+      ],
+      "auth:refs": [
+        "edl-s3-podaac"
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual",
+        "latest-version"
+      ]
+    }
+  }
+}

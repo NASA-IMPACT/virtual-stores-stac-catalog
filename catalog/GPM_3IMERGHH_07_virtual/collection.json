@@ -1,0 +1,167 @@
+{
+  "type": "Collection",
+  "id": "GPM_3IMERGHH_07_virtual",
+  "stac_version": "1.1.0",
+  "description": "Live output of the virtualizarr-data-pipelines template: an Icechunk v2 store over GES DISC GPM_3IMERGHH V07, appended per file (1000+ snapshots; latest 2026-06-02). Manifest is anonymous; chunks need GES DISC S3 credentials. Supersedes Earthmover's 2025 NASA-cloud-only pilot. A 2-snapshot scaffold store is also listed.\n\nStatus (probed 2026-11-06): Pipeline output, experimental.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    },
+    {
+      "rel": "via",
+      "href": "https://cmr.earthdata.nasa.gov/search/concepts/C2723754847-GES_DISC.umm_json",
+      "type": "application/vnd.nasa.cmr.umm+json",
+      "title": "CMR collection C2723754847-GES_DISC"
+    },
+    {
+      "rel": "about",
+      "href": "https://github.com/virtual-zarr/gpmimerghh-virtualizarr-data-pipeline",
+      "type": "text/html",
+      "title": "virtual-zarr/gpmimerghh-virtualizarr-data-pipeline"
+    },
+    {
+      "rel": "about",
+      "href": "https://github.com/virtual-zarr/gpmimerghh-icechunk",
+      "type": "text/html",
+      "title": "Design notes"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/authentication/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/virtual-assets/v1.0.0/schema.json"
+  ],
+  "storage:schemes": {
+    "aws-s3-nasa-eodc-public": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "nasa-eodc-public",
+      "region": "us-west-2",
+      "anonymous": true
+    },
+    "aws-s3-gesdisc-cumulus-prod-protected": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "gesdisc-cumulus-prod-protected",
+      "region": "us-west-2",
+      "anonymous": false
+    }
+  },
+  "auth:schemes": {
+    "edl-s3-ges_disc": {
+      "type": "s3",
+      "description": "Earthdata Login: temporary S3 credentials from https://data.gesdisc.earthdata.nasa.gov/s3credentials. Valid only for in-region (us-west-2) access."
+    }
+  },
+  "title": "GPM IMERG half-hourly V07 virtual Icechunk store",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          null,
+          null
+        ]
+      ]
+    }
+  },
+  "license": "other",
+  "keywords": [
+    "virtual-zarr",
+    "icechunk",
+    "gpm",
+    "imerg",
+    "precipitation"
+  ],
+  "providers": [
+    {
+      "name": "NASA GES DISC",
+      "roles": [
+        "producer",
+        "host"
+      ],
+      "url": "https://disc.gsfc.nasa.gov/"
+    },
+    {
+      "name": "NASA VEDA",
+      "roles": [
+        "processor",
+        "host"
+      ],
+      "url": "https://www.earthdata.nasa.gov/esds/veda"
+    }
+  ],
+  "assets": {
+    "source-data": {
+      "href": "s3://gesdisc-cumulus-prod-protected/GPM_L3/GPM_3IMERGHH.07/",
+      "type": "application/x-hdf5",
+      "title": "GPM IMERG HH V07 HDF5 granules",
+      "storage:refs": [
+        "aws-s3-gesdisc-cumulus-prod-protected"
+      ],
+      "auth:refs": [
+        "edl-s3-ges_disc"
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "icechunk": {
+      "href": "s3://nasa-eodc-public/icechunk/gpmimerg_hh_07/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "GPM IMERG HH V07 virtual Icechunk store (Icechunk v2)",
+      "storage:refs": [
+        "aws-s3-nasa-eodc-public"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/GPM_3IMERGHH_07_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual",
+        "latest-version"
+      ]
+    },
+    "scaffold-icechunk": {
+      "href": "s3://nasa-eodc-public/gpmimerg_hh_07/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "2-snapshot scaffold store",
+      "storage:refs": [
+        "aws-s3-nasa-eodc-public"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/GPM_3IMERGHH_07_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    }
+  }
+}

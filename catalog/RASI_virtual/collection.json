@@ -1,0 +1,268 @@
+{
+  "type": "Collection",
+  "id": "RASI_virtual",
+  "stac_version": "1.1.0",
+  "description": "VEDA Water Insight Icechunk stores over the RASI NetCDF archive: HISTORICAL, SSP245 and SSP585, plus an undocumented LSM and ROUTING variant (2026-03-06) that is not referenced anywhere. Store and chunks are both readable anonymously. Only NASA-hosted store on the Icechunk sample-datasets page.\n\nStatus (probed 2026-11-06): Early development; stores dated 2026-03-02.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    },
+    {
+      "rel": "about",
+      "href": "https://github.com/virtual-zarr/rasi-icechunk",
+      "type": "text/html",
+      "title": "virtual-zarr/rasi-icechunk"
+    },
+    {
+      "rel": "about",
+      "href": "https://icechunk.io/en/latest/sample-datasets/",
+      "type": "text/html",
+      "title": "Icechunk sample datasets"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/virtual-assets/v1.0.0/schema.json"
+  ],
+  "storage:schemes": {
+    "aws-s3-nasa-waterinsight": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "nasa-waterinsight",
+      "region": "us-west-2",
+      "anonymous": true
+    }
+  },
+  "title": "RASI (Regional Hydroclimate Projections) virtual Icechunk stores",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          null,
+          null
+        ]
+      ]
+    }
+  },
+  "license": "CC-BY-4.0",
+  "keywords": [
+    "virtual-zarr",
+    "icechunk",
+    "rasi",
+    "hydrology",
+    "cmip6"
+  ],
+  "providers": [
+    {
+      "name": "NASA VEDA",
+      "roles": [
+        "processor",
+        "host"
+      ],
+      "url": "https://www.earthdata.nasa.gov/esds/veda"
+    }
+  ],
+  "assets": {
+    "source-data": {
+      "href": "s3://nasa-waterinsight/RASI/",
+      "type": "application/x-netcdf",
+      "title": "RASI NetCDF files",
+      "storage:refs": [
+        "aws-s3-nasa-waterinsight"
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "historical-icechunk": {
+      "href": "s3://nasa-waterinsight/virtual-zarr-store/icechunk/RASI/HISTORICAL/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "RASI HISTORICAL virtual Icechunk store (Icechunk v1 layout)",
+      "storage:refs": [
+        "aws-s3-nasa-waterinsight"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/RASI_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "ssp245-icechunk": {
+      "href": "s3://nasa-waterinsight/virtual-zarr-store/icechunk/RASI/SSP245/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "RASI SSP245 virtual Icechunk store (Icechunk v1 layout)",
+      "storage:refs": [
+        "aws-s3-nasa-waterinsight"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/RASI_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "ssp585-icechunk": {
+      "href": "s3://nasa-waterinsight/virtual-zarr-store/icechunk/RASI/SSP585/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "RASI SSP585 virtual Icechunk store (Icechunk v1 layout)",
+      "storage:refs": [
+        "aws-s3-nasa-waterinsight"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/RASI_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "lsm-historical-icechunk": {
+      "href": "s3://nasa-waterinsight/virtual-zarr-store/RASI-icechunk/LSM/HISTORICAL/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "RASI LSM HISTORICAL virtual Icechunk store (undocumented variant)",
+      "storage:refs": [
+        "aws-s3-nasa-waterinsight"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/RASI_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "lsm-ssp245-icechunk": {
+      "href": "s3://nasa-waterinsight/virtual-zarr-store/RASI-icechunk/LSM/SSP245/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "RASI LSM SSP245 virtual Icechunk store (undocumented variant)",
+      "storage:refs": [
+        "aws-s3-nasa-waterinsight"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/RASI_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "lsm-ssp585-icechunk": {
+      "href": "s3://nasa-waterinsight/virtual-zarr-store/RASI-icechunk/LSM/SSP585/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "RASI LSM SSP585 virtual Icechunk store (undocumented variant)",
+      "storage:refs": [
+        "aws-s3-nasa-waterinsight"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/RASI_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "routing-historical-icechunk": {
+      "href": "s3://nasa-waterinsight/virtual-zarr-store/RASI-icechunk/ROUTING/HISTORICAL/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "RASI ROUTING HISTORICAL virtual Icechunk store (undocumented variant)",
+      "storage:refs": [
+        "aws-s3-nasa-waterinsight"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/RASI_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "routing-ssp245-icechunk": {
+      "href": "s3://nasa-waterinsight/virtual-zarr-store/RASI-icechunk/ROUTING/SSP245/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "RASI ROUTING SSP245 virtual Icechunk store (undocumented variant)",
+      "storage:refs": [
+        "aws-s3-nasa-waterinsight"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/RASI_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "routing-ssp585-icechunk": {
+      "href": "s3://nasa-waterinsight/virtual-zarr-store/RASI-icechunk/ROUTING/SSP585/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "RASI ROUTING SSP585 virtual Icechunk store (undocumented variant)",
+      "storage:refs": [
+        "aws-s3-nasa-waterinsight"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/RASI_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    }
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "type": "Collection",
+  "id": "OPERA_L3_DISP-S1_V1_virtual",
+  "stac_version": "1.1.0",
+  "description": "ASF publishes gzipped Kerchunk JSON (.zarr.json.gz) per granule and per-frame displacement stacks. The links are in granule-level UMM RelatedUrls with Format 'Zarr', not at collection level, so they are modelled here as item_assets: generate one STAC Item per granule (or frame) from CMR, and give each Item's zarr-references asset a vrt:hrefs entry pointing at that Item's data asset. Both reference files and chunks need Earthdata Login. Powers the OPERA Displacement Portal.\n\nStatus (probed 2026-11-06): Production; granules to 2025-07.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    },
+    {
+      "rel": "via",
+      "href": "https://cmr.earthdata.nasa.gov/search/concepts/C3294057315-ASF.umm_json",
+      "type": "application/vnd.nasa.cmr.umm+json",
+      "title": "CMR collection C3294057315-ASF"
+    },
+    {
+      "rel": "about",
+      "href": "https://cmr.earthdata.nasa.gov/search/granules.umm_json?collection_concept_id=C3294057315-ASF&page_size=2",
+      "type": "text/html",
+      "title": "CMR granule RelatedUrls"
+    },
+    {
+      "rel": "about",
+      "href": "https://displacement.asf.alaska.edu/",
+      "type": "text/html",
+      "title": "OPERA Displacement Portal"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/alternate-assets/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/authentication/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json"
+  ],
+  "storage:schemes": {
+    "aws-s3-asf-cumulus-prod-opera-products": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "asf-cumulus-prod-opera-products",
+      "region": "us-west-2",
+      "anonymous": false
+    },
+    "https-datapool.asf.alaska.edu": {
+      "type": "https",
+      "platform": "https://datapool.asf.alaska.edu",
+      "anonymous": false
+    }
+  },
+  "auth:schemes": {
+    "edl-s3-asf": {
+      "type": "s3",
+      "description": "Earthdata Login: temporary S3 credentials from https://sentinel1.asf.alaska.edu/s3credentials. Valid only for in-region (us-west-2) access."
+    },
+    "edl-bearer": {
+      "type": "http",
+      "scheme": "bearer",
+      "description": "Earthdata Login user token from https://urs.earthdata.nasa.gov, sent as 'Authorization: Bearer <token>' to the DAAC TEA HTTPS endpoint. Works from any region."
+    }
+  },
+  "item_assets": {
+    "data": {
+      "title": "DISP-S1 granule (NetCDF)",
+      "type": "application/x-netcdf",
+      "roles": [
+        "data"
+      ],
+      "storage:refs": [
+        "aws-s3-asf-cumulus-prod-opera-products"
+      ],
+      "auth:refs": [
+        "edl-s3-asf"
+      ]
+    },
+    "zarr-references": {
+      "title": "Per-granule Kerchunk JSON, gzipped (<GRANULE>.zarr.json.gz)",
+      "description": "s3://asf-cumulus-prod-opera-products/OPERA_L3_DISP-S1_V1/<GRANULE>/<GRANULE>.zarr.json.gz; HTTPS alternate https://datapool.asf.alaska.edu/DISP/OPERA-S1/<GRANULE>.zarr.json.gz",
+      "type": "application/gzip",
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ],
+      "storage:refs": [
+        "aws-s3-asf-cumulus-prod-opera-products"
+      ],
+      "auth:refs": [
+        "edl-s3-asf"
+      ],
+      "alternate": {
+        "https": {
+          "storage:refs": [
+            "https-datapool.asf.alaska.edu"
+          ],
+          "auth:refs": [
+            "edl-bearer"
+          ]
+        }
+      }
+    },
+    "stack-references": {
+      "title": "Per-frame short-wavelength displacement stack, Kerchunk JSON gzipped",
+      "description": "s3://asf-cumulus-prod-opera-products/OPERA_L3_DISP-S1_STACK_V1/<FRAME>/<FRAME>_short_wavelength_displacement.zarr.json.gz",
+      "type": "application/gzip",
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ],
+      "storage:refs": [
+        "aws-s3-asf-cumulus-prod-opera-products"
+      ],
+      "auth:refs": [
+        "edl-s3-asf"
+      ]
+    }
+  },
+  "title": "OPERA L3 DISP-S1 V1 virtual Zarr references",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          null,
+          null
+        ]
+      ]
+    }
+  },
+  "license": "other",
+  "keywords": [
+    "virtual-zarr",
+    "kerchunk",
+    "opera",
+    "insar",
+    "displacement"
+  ],
+  "providers": [
+    {
+      "name": "NASA ASF DAAC",
+      "roles": [
+        "producer",
+        "processor",
+        "host"
+      ],
+      "url": "https://asf.alaska.edu/"
+    }
+  ]
+}

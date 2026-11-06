@@ -1,0 +1,205 @@
+{
+  "type": "Collection",
+  "id": "GEOS-CF_v2_virtual",
+  "stac_version": "1.1.0",
+  "description": "VEDA/GMAO Icechunk stores over a GEOS-CF v2 air-quality subset (analysis and forecast streams). Bucket is in us-east-1. Chunks are read from the public NCCS THREDDS HTTPS server, so no login is needed anywhere. Several generations coexist and no canonical prefix is documented; geos-cf-v2-dev (Icechunk v2 layout) is marked latest here. xpystac 0.5 cannot open these because the chunk container is HTTPS, not S3: configure icechunk.VirtualChunkContainer('https://ds.nccs.nasa.gov/thredds/fileServer/', icechunk.http_store()).\n\nStatus (probed 2026-11-06): Early development; v2-dev 2026-04-24, prod 2026-04-03.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    },
+    {
+      "rel": "about",
+      "href": "https://github.com/virtual-zarr/geos-cf-icechunk",
+      "type": "text/html",
+      "title": "virtual-zarr/geos-cf-icechunk"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/virtual-assets/v1.0.0/schema.json"
+  ],
+  "storage:schemes": {
+    "aws-s3-veda-geos-cf-virtualizarr": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "veda-geos-cf-virtualizarr",
+      "region": "us-east-1",
+      "anonymous": true
+    },
+    "https-ds.nccs.nasa.gov": {
+      "type": "https",
+      "platform": "https://ds.nccs.nasa.gov",
+      "anonymous": true
+    }
+  },
+  "title": "GEOS-CF v2 air-quality subset virtual Icechunk stores",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          null,
+          null
+        ]
+      ]
+    }
+  },
+  "license": "other",
+  "keywords": [
+    "virtual-zarr",
+    "icechunk",
+    "geos-cf",
+    "air-quality"
+  ],
+  "providers": [
+    {
+      "name": "NASA GMAO",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://gmao.gsfc.nasa.gov/"
+    },
+    {
+      "name": "NASA VEDA",
+      "roles": [
+        "processor",
+        "host"
+      ],
+      "url": "https://www.earthdata.nasa.gov/esds/veda"
+    },
+    {
+      "name": "NASA NCCS",
+      "roles": [
+        "host"
+      ],
+      "url": "https://www.nccs.nasa.gov/"
+    }
+  ],
+  "assets": {
+    "source-data": {
+      "href": "https://ds.nccs.nasa.gov/thredds/fileServer/",
+      "type": "application/x-netcdf",
+      "title": "GEOS-CF NetCDF files on NCCS THREDDS",
+      "storage:refs": [
+        "https-ds.nccs.nasa.gov"
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "v2-dev-icechunk": {
+      "href": "s3://veda-geos-cf-virtualizarr/geos-cf-v2-dev/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "GEOS-CF v2-dev (Icechunk v2 layout)",
+      "storage:refs": [
+        "aws-s3-veda-geos-cf-virtualizarr"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/GEOS-CF_v2_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual",
+        "latest-version"
+      ]
+    },
+    "dev-prod-icechunk": {
+      "href": "s3://veda-geos-cf-virtualizarr/geos-cf-dev/prod/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "GEOS-CF geos-cf-dev/prod (Icechunk v1 layout)",
+      "storage:refs": [
+        "aws-s3-veda-geos-cf-virtualizarr"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/GEOS-CF_v2_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "pipelines-prod-icechunk": {
+      "href": "s3://veda-geos-cf-virtualizarr/geos-cf-virtualizarr-data-pipelines/prod/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "GEOS-CF data-pipelines/prod (Icechunk v1 layout)",
+      "storage:refs": [
+        "aws-s3-veda-geos-cf-virtualizarr"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/GEOS-CF_v2_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "dev-preprod-icechunk": {
+      "href": "s3://veda-geos-cf-virtualizarr/geos-cf-dev/preprod/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "GEOS-CF geos-cf-dev/preprod (Icechunk v1 layout)",
+      "storage:refs": [
+        "aws-s3-veda-geos-cf-virtualizarr"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/GEOS-CF_v2_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    },
+    "pipelines-preprod-icechunk": {
+      "href": "s3://veda-geos-cf-virtualizarr/geos-cf-virtualizarr-data-pipelines/preprod/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "GEOS-CF data-pipelines/preprod (Icechunk v1 layout)",
+      "storage:refs": [
+        "aws-s3-veda-geos-cf-virtualizarr"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/GEOS-CF_v2_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    }
+  }
+}

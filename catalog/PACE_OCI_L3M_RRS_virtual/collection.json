@@ -1,0 +1,163 @@
+{
+  "type": "Collection",
+  "id": "PACE_OCI_L3M_RRS_virtual",
+  "stac_version": "1.1.0",
+  "description": "Fish-PACE Applications User Group Icechunk v2 stores over OB.DAAC PACE_OCI_L3M_RRS: daily, 8-day and monthly at 0.1 degree and 4 km, under one prefix. Manifest is anonymous on Source Cooperative; chunks are in the OB.DAAC bucket and need Earthdata Login with in-region (us-west-2) access. Requires icechunk 2.x and earthaccess credentials.\n\nStatus (probed 2026-11-06): Published 2026-06-27.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    },
+    {
+      "rel": "about",
+      "href": "https://source.coop/fish-pace/pace-oci",
+      "type": "text/html",
+      "title": "source.coop/fish-pace/pace-oci"
+    },
+    {
+      "rel": "about",
+      "href": "https://data.source.coop/fish-pace/pace-oci/README.md",
+      "type": "text/html",
+      "title": "README"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/alternate-assets/v1.2.0/schema.json",
+    "https://stac-extensions.github.io/authentication/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/virtual-assets/v1.0.0/schema.json"
+  ],
+  "storage:schemes": {
+    "aws-s3-us-west-2.opendata.source.coop": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "us-west-2.opendata.source.coop",
+      "region": "us-west-2",
+      "anonymous": true
+    },
+    "https-data.source.coop": {
+      "type": "https",
+      "platform": "https://data.source.coop",
+      "anonymous": true
+    },
+    "aws-s3-ob-cumulus-prod-public": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "ob-cumulus-prod-public",
+      "region": "us-west-2",
+      "anonymous": false
+    }
+  },
+  "auth:schemes": {
+    "edl-s3-obdaac": {
+      "type": "s3",
+      "description": "Earthdata Login: temporary S3 credentials from https://obdaac-tea.earthdatacloud.nasa.gov/s3credentials. Valid only for in-region (us-west-2) access."
+    }
+  },
+  "title": "PACE OCI L3M RRS virtual Icechunk stores",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          null,
+          null
+        ]
+      ]
+    }
+  },
+  "license": "other",
+  "keywords": [
+    "virtual-zarr",
+    "icechunk",
+    "pace",
+    "oci",
+    "ocean-color",
+    "rrs"
+  ],
+  "providers": [
+    {
+      "name": "NASA OB.DAAC",
+      "roles": [
+        "producer",
+        "host"
+      ],
+      "url": "https://oceancolor.gsfc.nasa.gov/"
+    },
+    {
+      "name": "Fish-PACE Applications User Group",
+      "roles": [
+        "processor"
+      ],
+      "url": "https://source.coop/fish-pace"
+    },
+    {
+      "name": "Source Cooperative",
+      "roles": [
+        "host"
+      ],
+      "url": "https://source.coop/"
+    }
+  ],
+  "assets": {
+    "source-data": {
+      "href": "s3://ob-cumulus-prod-public/",
+      "type": "application/x-netcdf",
+      "title": "PACE OCI L3M granules (OB.DAAC bucket)",
+      "storage:refs": [
+        "aws-s3-ob-cumulus-prod-public"
+      ],
+      "auth:refs": [
+        "edl-s3-obdaac"
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "icechunk": {
+      "href": "s3://us-west-2.opendata.source.coop/fish-pace/pace-oci/inregion/PACE_OCI_L3M_RRS/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "PACE_OCI_L3M_RRS Icechunk v2 stores (all frequencies and resolutions under this prefix)",
+      "storage:refs": [
+        "aws-s3-us-west-2.opendata.source.coop"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/PACE_OCI_L3M_RRS_virtual#/assets/source-data"
+        }
+      ],
+      "alternate": {
+        "https": {
+          "href": "https://data.source.coop/fish-pace/pace-oci/inregion/PACE_OCI_L3M_RRS",
+          "storage:refs": [
+            "https-data.source.coop"
+          ]
+        }
+      },
+      "roles": [
+        "data",
+        "references",
+        "virtual",
+        "latest-version"
+      ]
+    }
+  }
+}

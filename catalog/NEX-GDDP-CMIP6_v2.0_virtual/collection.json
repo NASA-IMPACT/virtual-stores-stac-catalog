@@ -1,0 +1,175 @@
+{
+  "type": "Collection",
+  "id": "NEX-GDDP-CMIP6_v2.0_virtual",
+  "stac_version": "1.1.0",
+  "description": "CarbonPlan's virtual DataTree over the full NEX-GDDP-CMIP6 v2.0 archive on AWS Open Data: 38 TB of NetCDF in about 740 MB of Icechunk v2, plus a 'basal' catalog store. Fully anonymous. The store is a DataTree, so open it with xr.open_datatree on the Icechunk session store rather than xr.open_zarr. Source data are CC0; the store itself carries no license. CarbonPlan also published 164 Kerchunk Parquet reference sets for the same data in 2024 at s3://carbonplan-share/nasa-nex-reference/references_prod/ (not catalogued here).\n\nStatus (probed 2026-11-06): Published 2026-07-29.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    },
+    {
+      "rel": "about",
+      "href": "https://github.com/virtual-zarr/nex-gddp-cmip6",
+      "type": "text/html",
+      "title": "virtual-zarr/nex-gddp-cmip6"
+    },
+    {
+      "rel": "about",
+      "href": "https://discourse.pangeo.io/t/public-virtual-zarr-of-the-nasa-nex-gddp-cmip6-dataset/5802",
+      "type": "text/html",
+      "title": "Pangeo Discourse announcement"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/virtual-assets/v1.0.0/schema.json"
+  ],
+  "storage:schemes": {
+    "aws-s3-us-west-2.opendata.source.coop": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "us-west-2.opendata.source.coop",
+      "region": "us-west-2",
+      "anonymous": true
+    },
+    "aws-s3-carbonplan-share": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "carbonplan-share",
+      "region": "us-west-2",
+      "anonymous": true
+    },
+    "aws-s3-nex-gddp-cmip6": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "nex-gddp-cmip6",
+      "region": "us-west-2",
+      "anonymous": true
+    }
+  },
+  "title": "NEX-GDDP-CMIP6 v2.0 virtual DataTree (Icechunk)",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          null,
+          null
+        ]
+      ]
+    }
+  },
+  "license": "other",
+  "keywords": [
+    "virtual-zarr",
+    "icechunk",
+    "cmip6",
+    "nex-gddp",
+    "climate",
+    "datatree"
+  ],
+  "providers": [
+    {
+      "name": "NASA Earth Exchange (NEX)",
+      "roles": [
+        "producer"
+      ],
+      "url": "https://www.nasa.gov/nex"
+    },
+    {
+      "name": "CarbonPlan",
+      "roles": [
+        "processor"
+      ],
+      "url": "https://carbonplan.org/"
+    },
+    {
+      "name": "Source Cooperative",
+      "roles": [
+        "host"
+      ],
+      "url": "https://source.coop/"
+    }
+  ],
+  "assets": {
+    "source-data": {
+      "href": "s3://nex-gddp-cmip6/",
+      "type": "application/x-netcdf",
+      "title": "NEX-GDDP-CMIP6 NetCDF files (AWS Open Data)",
+      "storage:refs": [
+        "aws-s3-nex-gddp-cmip6"
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "icechunk": {
+      "href": "s3://us-west-2.opendata.source.coop/carbonplan/virtual-datasets/nex-gddp-cmip6/store.icechunk",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "NEX-GDDP-CMIP6 virtual DataTree (Icechunk v2)",
+      "storage:refs": [
+        "aws-s3-us-west-2.opendata.source.coop"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/NEX-GDDP-CMIP6_v2.0_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual",
+        "latest-version"
+      ]
+    },
+    "basal-icechunk": {
+      "href": "s3://us-west-2.opendata.source.coop/carbonplan/virtual-datasets/nex-gddp-cmip6/basal.icechunk",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "Basal catalog store (Icechunk v2)",
+      "storage:refs": [
+        "aws-s3-us-west-2.opendata.source.coop"
+      ],
+      "roles": [
+        "metadata"
+      ]
+    },
+    "carbonplan-share-icechunk": {
+      "href": "s3://carbonplan-share/nasa-nex-virtual/nasa-nex-gddp-cmip6.icechunk/",
+      "type": "application/vnd.zarr+icechunk",
+      "title": "Copy on carbonplan-share",
+      "storage:refs": [
+        "aws-s3-carbonplan-share"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data",
+          "href": "https://staging.openveda.cloud/api/stac/collections/NEX-GDDP-CMIP6_v2.0_virtual#/assets/source-data"
+        }
+      ],
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    }
+  }
+}

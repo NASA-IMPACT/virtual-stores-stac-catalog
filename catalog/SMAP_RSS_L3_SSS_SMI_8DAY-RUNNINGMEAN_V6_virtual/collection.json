@@ -1,0 +1,198 @@
+{
+  "type": "Collection",
+  "id": "SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6_virtual",
+  "stac_version": "1.1.0",
+  "description": "PO.DAAC Virtual Data Set for SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6, advertised in CMR as RelatedUrl GET DATA / VIRTUAL COLLECTION. Reference files are anonymous over TEA HTTPS (bucket listing denied); chunks need Earthdata Login. The *_virtual_https reference resolves chunks over HTTPS (bearer token, any region); the *_virtual_s3 reference resolves chunks over S3 (temporary credentials, us-west-2 only).\n\nStatus (probed 2026-11-06): Production.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    },
+    {
+      "rel": "via",
+      "href": "https://cmr.earthdata.nasa.gov/search/concepts/C2832227567-POCLOUD.umm_json",
+      "type": "application/vnd.nasa.cmr.umm+json",
+      "title": "CMR collection C2832227567-POCLOUD"
+    },
+    {
+      "rel": "about",
+      "href": "https://podaac.github.io/tutorials/quarto_text/UsingVirtualDatasets.html",
+      "type": "text/html",
+      "title": "Using Virtual Datasets"
+    },
+    {
+      "rel": "about",
+      "href": "https://podaac.github.io/tutorials/notebooks/Advanced_cloud/using_vds_starter.html",
+      "type": "text/html",
+      "title": "Starter notebook"
+    },
+    {
+      "rel": "parent",
+      "href": "../catalog.json",
+      "type": "application/json",
+      "title": "NASA Earthdata Virtual Stores"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/authentication/v1.1.0/schema.json",
+    "https://stac-extensions.github.io/storage/v2.0.0/schema.json",
+    "https://stac-extensions.github.io/virtual-assets/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/xarray-assets/v1.0.0/schema.json"
+  ],
+  "storage:schemes": {
+    "https-archive.podaac.earthdata.nasa.gov-podaac-ops-cumulus-public": {
+      "type": "https",
+      "platform": "https://archive.podaac.earthdata.nasa.gov/{bucket}",
+      "anonymous": true,
+      "bucket": "podaac-ops-cumulus-public"
+    },
+    "https-archive.podaac.earthdata.nasa.gov-podaac-ops-cumulus-protected": {
+      "type": "https",
+      "platform": "https://archive.podaac.earthdata.nasa.gov/{bucket}",
+      "anonymous": false,
+      "bucket": "podaac-ops-cumulus-protected"
+    },
+    "aws-s3-podaac-ops-cumulus-protected": {
+      "type": "aws-s3",
+      "platform": "https://{bucket}.s3.{region}.amazonaws.com",
+      "bucket": "podaac-ops-cumulus-protected",
+      "region": "us-west-2",
+      "anonymous": false
+    }
+  },
+  "auth:schemes": {
+    "edl-bearer": {
+      "type": "http",
+      "scheme": "bearer",
+      "description": "Earthdata Login user token from https://urs.earthdata.nasa.gov, sent as 'Authorization: Bearer <token>' to the DAAC TEA HTTPS endpoint. Works from any region."
+    },
+    "edl-s3-podaac": {
+      "type": "s3",
+      "description": "Earthdata Login: temporary S3 credentials from https://archive.podaac.earthdata.nasa.gov/s3credentials. Valid only for in-region (us-west-2) access."
+    }
+  },
+  "title": "SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6 virtual dataset",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180.0,
+          -90.0,
+          180.0,
+          90.0
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          null,
+          null
+        ]
+      ]
+    }
+  },
+  "license": "other",
+  "keywords": [
+    "virtual-zarr",
+    "kerchunk",
+    "podaac"
+  ],
+  "providers": [
+    {
+      "name": "NASA PO.DAAC",
+      "roles": [
+        "producer",
+        "processor",
+        "host"
+      ],
+      "url": "https://podaac.jpl.nasa.gov/"
+    }
+  ],
+  "assets": {
+    "source-data-https": {
+      "href": "https://archive.podaac.earthdata.nasa.gov/podaac-ops-cumulus-protected/SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6/",
+      "type": "application/x-netcdf",
+      "title": "SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6 granules over TEA HTTPS",
+      "storage:refs": [
+        "https-archive.podaac.earthdata.nasa.gov-podaac-ops-cumulus-protected"
+      ],
+      "auth:refs": [
+        "edl-bearer"
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "source-data-s3": {
+      "href": "s3://podaac-ops-cumulus-protected/SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6/",
+      "type": "application/x-netcdf",
+      "title": "SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6 granules over S3",
+      "storage:refs": [
+        "aws-s3-podaac-ops-cumulus-protected"
+      ],
+      "auth:refs": [
+        "edl-s3-podaac"
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "kerchunk-https": {
+      "href": "https://archive.podaac.earthdata.nasa.gov/podaac-ops-cumulus-public/virtual_collections/SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6/SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6_virtual_https.json",
+      "type": "application/json",
+      "title": "SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6 Kerchunk JSON, HTTPS chunk references",
+      "storage:refs": [
+        "https-archive.podaac.earthdata.nasa.gov-podaac-ops-cumulus-public"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data-https",
+          "href": "https://staging.openveda.cloud/api/stac/collections/SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6_virtual#/assets/source-data-https"
+        }
+      ],
+      "xarray:open_kwargs": {
+        "engine": "kerchunk",
+        "storage_options": {
+          "remote_protocol": "https"
+        }
+      },
+      "roles": [
+        "data",
+        "references",
+        "virtual",
+        "latest-version"
+      ]
+    },
+    "kerchunk-s3": {
+      "href": "https://archive.podaac.earthdata.nasa.gov/podaac-ops-cumulus-public/virtual_collections/SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6/SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6_virtual_s3.json",
+      "type": "application/json",
+      "title": "SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6 Kerchunk JSON, S3 chunk references",
+      "storage:refs": [
+        "https-archive.podaac.earthdata.nasa.gov-podaac-ops-cumulus-public"
+      ],
+      "vrt:hrefs": [
+        {
+          "key": "source-data-s3",
+          "href": "https://staging.openveda.cloud/api/stac/collections/SMAP_RSS_L3_SSS_SMI_8DAY-RUNNINGMEAN_V6_virtual#/assets/source-data-s3"
+        }
+      ],
+      "xarray:open_kwargs": {
+        "engine": "kerchunk",
+        "storage_options": {
+          "remote_protocol": "s3",
+          "remote_options": {
+            "anon": false
+          }
+        }
+      },
+      "roles": [
+        "data",
+        "references",
+        "virtual"
+      ]
+    }
+  }
+}
